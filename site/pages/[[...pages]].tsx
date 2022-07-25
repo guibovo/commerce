@@ -10,6 +10,11 @@ import getSlug from '@lib/get-slug'
 import { missingLocaleInPages } from '@lib/usage-warns'
 import type { Page } from '@commerce/types/page'
 import { useRouter } from 'next/router'
+import { BuilderComponent, builder, useIsPreviewing } from '@builder.io/react'
+import Head from 'next/head'
+import DefaultErrorPage from 'next/error'
+
+builder.init(process.env.BUILDER_IO_PUBLIC_API!)
 
 export async function getStaticProps({
   preview,
@@ -17,16 +22,21 @@ export async function getStaticProps({
   locale,
   locales,
 }: GetStaticPropsContext<{ pages: string[] }>) {
+  // ECOMMERCE PAGES
   const config = { locale, locales }
   const pagesPromise = commerce.getAllPages({ config, preview })
   const siteInfoPromise = commerce.getSiteInfo({ config, preview })
   const { pages } = await pagesPromise
   const { categories } = await siteInfoPromise
-  const path = params?.pages.join('/')
+  console.log('-------------')
+  console.log(params)
+  console.log('-------------')
+  const path = params?.pages ? params?.pages.join('/') : '/'
   const slug = locale ? `${locale}/${path}` : path
   const pageItem = pages.find((p: Page) =>
     p.url ? getSlug(p.url) === slug : false
   )
+
   const data =
     pageItem &&
     (await commerce.getPage({
@@ -34,8 +44,21 @@ export async function getStaticProps({
       config,
       preview,
     }))
+  // ECOMMERCE PAGES
 
-  const page = data?.page
+  let page = data?.page
+
+  if (!data?.page) {
+    // BUILDER IO PAGES
+    // Fetch the builder content
+    page = await builder
+      .get('page', {
+        userAttributes: {
+          urlPath: '/' + (params?.pages?.join('/') || ''),
+        },
+      })
+      .toPromise()
+  }
 
   if (!page) {
     return {
@@ -53,7 +76,7 @@ export async function getStaticPaths({ locales }: GetStaticPathsContext) {
   const config = { locales }
   const { pages }: { pages: Page[] } = await commerce.getAllPages({ config })
   const [invalidPaths, log] = missingLocaleInPages()
-  const paths = pages
+  const ecommercePaths = pages
     .map((page) => page.url)
     .filter((url) => {
       if (!url || !locales) return url
@@ -64,23 +87,40 @@ export async function getStaticPaths({ locales }: GetStaticPathsContext) {
     })
   log()
 
+  const builderPages = await builder.getAll('page', {
+    // We only need the URL field
+    fields: 'data.url',
+    options: { noTargeting: true },
+  })
+  const builderPaths = builderPages.map((page) => `${page.data?.url}`)
+
+  console.log([...ecommercePaths, ...builderPaths])
   return {
-    paths,
+    paths: [...ecommercePaths, ...builderPaths],
     fallback: 'blocking',
   }
 }
 
-export default function Pages({
-  page,
-}: {page: Page}) {
+export default function Pages({ page }) {
   const router = useRouter()
+  const isPreviewing = useIsPreviewing()
 
-  return router.isFallback ? (
-    <h1>Loading...</h1> // TODO (BC) Add Skeleton Views
-  ) : (
-    <div className="max-w-2xl mx-8 sm:mx-auto py-20">
-      {page?.body && <Text html={page.body} />}
-    </div>
+  if (router.isFallback) {
+    return <h1>Loading...</h1>
+  }
+
+  if (!page && !isPreviewing) {
+    return <DefaultErrorPage statusCode={404} />
+  }
+
+  return (
+    <>
+      <Head>
+        <title>{page?.data.title}</title>
+      </Head>
+      {/* Render the Builder page */}
+      <BuilderComponent model="page" content={page} />
+    </>
   )
 }
 
