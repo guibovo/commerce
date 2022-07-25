@@ -28,9 +28,6 @@ export async function getStaticProps({
   const siteInfoPromise = commerce.getSiteInfo({ config, preview })
   const { pages } = await pagesPromise
   const { categories } = await siteInfoPromise
-  console.log('-------------')
-  console.log(params)
-  console.log('-------------')
   const path = params?.pages ? params?.pages.join('/') : '/'
   const slug = locale ? `${locale}/${path}` : path
   const pageItem = pages.find((p: Page) =>
@@ -94,7 +91,6 @@ export async function getStaticPaths({ locales }: GetStaticPathsContext) {
   })
   const builderPaths = builderPages.map((page) => `${page.data?.url}`)
 
-  console.log([...ecommercePaths, ...builderPaths])
   return {
     paths: [...ecommercePaths, ...builderPaths],
     fallback: 'blocking',
