@@ -14,7 +14,7 @@ import { BuilderComponent, builder, useIsPreviewing } from '@builder.io/react'
 import Head from 'next/head'
 import DefaultErrorPage from 'next/error'
 
-builder.init(process.env.BUILDER_IO_PUBLIC_API!)
+builder.init('7524adafaf9449f38de808d06bae1afc')
 
 export async function getStaticProps({
   preview,
