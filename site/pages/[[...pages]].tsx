@@ -10,9 +10,15 @@ import getSlug from '@lib/get-slug'
 import { missingLocaleInPages } from '@lib/usage-warns'
 import type { Page } from '@commerce/types/page'
 import { useRouter } from 'next/router'
-import { BuilderComponent, builder, useIsPreviewing } from '@builder.io/react'
+import {
+  BuilderComponent,
+  builder,
+  useIsPreviewing,
+  Builder,
+} from '@builder.io/react'
 import Head from 'next/head'
 import DefaultErrorPage from 'next/error'
+import Header from '../components/common/Header'
 
 builder.init('7524adafaf9449f38de808d06bae1afc')
 
@@ -121,3 +127,8 @@ export default function Pages({ page }) {
 }
 
 Pages.Layout = Layout
+
+Builder.registerComponent(Header, {
+  name: 'Header',
+  inputs: [{ name: 'title', type: 'text' }],
+})
