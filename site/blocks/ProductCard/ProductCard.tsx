@@ -1,6 +1,8 @@
 import { Link } from '@components/ui'
+import { Product } from '~/packages/commerce/types'
 
-const ProductCard = ({ data }) => {
+const ProductCard = ({ data }: { data: { product: Product }}) => {
+  
   const product = data?.product
   return product 
     ? <div style={{ display: 'flex', flexDirection: 'column', maxWidth: '300px', alignContent: 'center', justifyContent: 'center' }}>

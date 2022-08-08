@@ -27,7 +27,6 @@ export async function resolveBuilderContent(
             variables: { slug: props.product_handle },
           })
         }
-        console.log(product)
         return {
           // resolve the query as `products` for ssr
           // used for example in ProductGrid.tsx as initialProducts

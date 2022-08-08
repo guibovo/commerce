@@ -17,11 +17,6 @@ const LazyProductCard = dynamic(async () => {
 builder.init('7524adafaf9449f38de808d06bae1afc')
 
 import '../blocks/ProductCard/ProductCard.builder'
-// import '../blocks/CollectionView/CollectionView.builder'
-// import '../blocks/ProductView/ProductView.builder'
-// import '../blocks/CloudinaryImage/CloudinaryImage.builder'
-
-
 
 Builder.registerComponent(LazyProductCard, {
   name: 'ProductCard',
