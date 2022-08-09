@@ -1,9 +1,9 @@
 import { Link } from '@components/ui'
 import { useEffect, useState } from 'react'
-import { Product } from '~/packages/commerce/types'
+// import { Product } from '~/packages/commerce/types'
 import Client from 'shopify-buy';
 
-const ProductCard = ({ data, product_handle }: { data: { product: Product }, product_handle: string}) => {
+const ProductCard = ({ data, product_handle }: { data: { product: any }, product_handle: string}) => {
   const client = Client.buildClient({
     domain: 'jvn-test.myshopify.com',
     storefrontAccessToken: '45b3c40271fd0101fbcbc09efa3238c0'
