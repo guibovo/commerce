@@ -36,11 +36,11 @@ const ProductCard = ({ data, product_handle }: { data: { product: any }, product
               {
                   "id": res.variants[0].id,
                   "name": res.variants[0].title,
-                  "sku": res.variants[0].sku,
+                  "sku": 'sku',
                   "price": res.variants[0].price,
-                  "listPrice": res.variants[0].compaerAtPrice,
+                  "listPrice": res.variants[0].price,
                   "requiresShipping": true,
-                  "availableForSale": res.variants[0].availableForSale,
+                  "availableForSale": true,
                   "options": [
                       {
                           "__typename": "MultipleChoiceOption",
