@@ -20,16 +20,16 @@ const ProductCard = ({ data, product_handle }: { data: { product: any }, product
             id: res.id,
             name: res.title,
             description: res.description,
-            descriptionHtml: res.descriptionHtml,
+            descriptionHtml: res.description,
             sku: res.id,
-            slug: res.handle,
-            path: `/${res.handle}`,
+            slug: '',
+            path: ``,
             images: [
               {
                   "url": res.images[0].src,
-                  "altText": res.images[0].altText,
-                  "width": res.images[0].height,
-                  "height": res.images[0].width
+                  "altText": '',
+                  "width": 1440,
+                  "height": 1440
               }
           ],
             variants: [
