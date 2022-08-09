@@ -30,6 +30,7 @@ export async function getStaticProps({
     locale,
     urlPath: '/' + (params?.path?.join('/') || ''),
   })
+
   return {
     props: {
       page,
