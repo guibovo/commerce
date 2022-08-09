@@ -30,6 +30,7 @@
     "@theme-ui/core": "^0.14.7",
     "@theme-ui/mdx": "^0.14.7",
     "@theme-ui/presets": "^0.14.7",
-    "next-seo": "^5.5.0"
+    "next-seo": "^5.5.0",
+    "shopify-buy": "^2.16.1"
   }
 }
