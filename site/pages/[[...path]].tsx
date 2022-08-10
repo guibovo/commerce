@@ -14,6 +14,7 @@ import { resolveBuilderContent } from '@lib/resolve-builder-content'
 // builder.init(builderConfig.apiKey)
 builder.init('7524adafaf9449f38de808d06bae1afc')
 import '../blocks/ProductCard/ProductCard.builder'
+import '../blocks/common/Hero/Hero.builder'
 
 import { Link } from '@components/ui'
 import { getLayoutProps } from '@lib/get-layout-props'

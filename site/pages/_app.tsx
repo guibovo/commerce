@@ -14,9 +14,13 @@ import { builder, Builder } from '@builder.io/react'
 const LazyProductCard = dynamic(async () => {
   return (await import('../blocks/ProductCard/ProductCard'))
 })
+const LazyHero = dynamic(async () => {
+  return (await import('../blocks/common/Hero/Hero'))
+})
 builder.init('7524adafaf9449f38de808d06bae1afc')
 
 import '../blocks/ProductCard/ProductCard.builder'
+import '../blocks/common/Hero/Hero.builder'
 
 Builder.registerComponent(LazyProductCard, {
   name: 'ProductCard',
@@ -30,11 +34,42 @@ Builder.registerComponent(LazyProductCard, {
   ],
 })
 
+Builder.registerComponent(LazyHero, {
+  name: 'Hero',
+  image: 'https://unpkg.com/css.gg@2.0.0/icons/svg/play-list-add.svg',
+  description: 'Pick products free form',
+  inputs: [
+    {
+      name: "headline",
+      type: "string"
+    },
+    {
+      name: "subline",
+      type: "string"
+    },
+    {
+      name: 'image',
+      type: 'file',
+      allowedFileTypes: ['jpeg', 'jpg', 'png', 'svg'],
+      required: true,
+      defaultValue:
+     'https://cdn.builder.io/api/v1/image/assets%2Fpwgjf0RoYWbdnJSbpBAjXNRMe9F2%2Ffb27a7c790324294af8be1c35fe30f4d',
+    },
+  ],
+})
+
 // Use this to create a menu in Builder IO
 Builder.register('insertMenu', {
   name: 'Shopify Products Components',
   items: [
     { name: 'ProductCard' },
+  ],
+})
+
+Builder.register('insertMenu', {
+  name: 'Brand Commons',
+  items: [
+    { name: 'Hero' },
   ],
 })
 
