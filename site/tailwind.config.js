@@ -2,6 +2,9 @@ module.exports = {
   content: [
     './pages/**/*.{js,ts,jsx,tsx}',
     './components/**/*.{js,ts,jsx,tsx}',
+    './blocks/**/*.{js,ts,jsx,tsx}',
+    './blocks/**/**/*.{js,ts,jsx,tsx}',
+    './site/**/*.{js,jsx,ts,tsx}',
   ],
   safelist: ['outline-none'],
   theme: {
@@ -41,6 +44,12 @@ module.exports = {
         base: 'var(--text-base)',
         primary: 'var(--text-primary)',
         secondary: 'var(--text-secondary)',
+      },
+      fontFamily: {
+        barlow: ['Barlow Semi Condensed'],
+        garamond: ['EB Garamond'],
+        dtldocumenta: ['EB Garamond'],
+        melbourne: ['EB Garamond']
       },
       boxShadow: {
         'outline-normal': '0 0 0 2px var(--accent-2)',

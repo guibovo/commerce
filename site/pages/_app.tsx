@@ -48,6 +48,26 @@ Builder.registerComponent(LazyHero, {
       type: "string"
     },
     {
+      name: "superiorLine",
+      type: "string"
+    },
+    {
+      name: "mainText",
+      type: "string"
+    },
+    {
+      name: "normalValue",
+      type: "string"
+    },
+    {
+      name: "discountedValue",
+      type: "string"
+    },
+    {
+      name: "buttonText",
+      type: "string"
+    },
+    {
       name: 'image',
       type: 'file',
       allowedFileTypes: ['jpeg', 'jpg', 'png', 'svg'],
