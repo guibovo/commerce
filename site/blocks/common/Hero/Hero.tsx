@@ -15,8 +15,8 @@ const Hero = ({ headline, subline, image, buttonText, superiorLine, mainText, no
     return (
         <section className="section-1 bg-white">
             <a className='text-black no-underline outline-none' href="https://biossance.com/products/award-winning-skin-test">
-                <div className="top-40 left-60 absolute max-w-[35%] pr-20" style={{zIndex: 9}}>
-                    <div>
+                <div className="top-40 left-96 absolute max-w-[25%] pr-20" style={{zIndex: 9}}>
+                    <div className='pt-40'>
                         <h4 className="uppercase text-base inline-block font-barlow text-yellow-800 overflow-hidden whitespace-no-wrap">
                             <span>{superiorLine}</span>
                         </h4>
@@ -44,7 +44,7 @@ const Hero = ({ headline, subline, image, buttonText, superiorLine, mainText, no
                     alt="hero"
                     layout='responsive'
                     width={1200} 
-                    height={600}
+                    height={560}
                 />
             </a>
         </section>
