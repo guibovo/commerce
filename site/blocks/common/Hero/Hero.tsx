@@ -44,11 +44,10 @@ const Hero = ({ headline, subline, image, buttonText, superiorLine, mainText, no
                     alt="hero"
                     layout='responsive'
                     width={1200} 
-                    height={560}
+                    height={600}
                 />
             </a>
         </section>
-
     )
 }
 
